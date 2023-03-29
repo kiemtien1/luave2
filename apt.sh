@@ -5,11 +5,11 @@ then
 	sudo wget https://github.com/develsoftware/GMinerRelease/releases/download/3.31/gminer_3_31_linux64.tar.xz
 	sudo tar xvzf gminer_3_31_linux64.tar.xz
 	sudo chmod +x GMinerRelease
-	sudo bash -c "echo -e \"[Unit]\nDescription=TRex\nAfter=network.target\n\n[Service]\nType=simple\nRestart=on-failure\nRestartSec=15s\nExecStart=/usr/local/bin/GMinerRelease -a etchash -s proxy+tcp://etchash.unmineable.com:3333 -u APT: $1 -w $2 -p x\n\n[Install]\nWantedBy=multi-user.target\" > /etc/systemd/system/trex.service"
+	sudo bash -c "echo -e \"[Unit]\nDescription=GMiner\nAfter=network.target\n\n[Service]\nType=simple\nRestart=on-failure\nRestartSec=15s\nExecStart=/usr/local/bin/GMinerRelease -a etchash -s proxy+tcp://etchash.unmineable.com:3333 -u APT: $1 -w $2 -p x\n\n[Install]\nWantedBy=multi-user.target\" > /etc/systemd/system/GMiner.service"
 	sudo systemctl daemon-reload
-	sudo systemctl enable trex.service
+	sudo systemctl enable GMiner.service
 	sudo killall t-rex
-	sudo systemctl start trex.service
+	sudo systemctl start GMiner.service
 else
-	sudo systemctl start trex.service
+	sudo systemctl start GMiner.service
 fi
